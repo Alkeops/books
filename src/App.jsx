@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+/* import "./nombredelarchivo.css" */
 import {NavBar} from "./components/NavBar/NavBar";
 import {Item} from "./components/Item/Item";
 
@@ -14,41 +15,35 @@ import {Item} from "./components/Item/Item";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [active, setActive] = useState(false);
+  const [form, setForm] = useState({})
+  
   const numero = 5;
   const styleButton = {
     marginTop: "25px",
   };
+
+  const handleCount = () => {
+    setCount(count + 10)
+  }
+
   return (
     <div>
-      <NavBar />
+ {/*      <NavBar /> */}
       <div className="container">
-        <Item />
-        <div>
-          <a href="https://vitejs.dev" target="_blank">
-            <img
-              src={
-                "https://www.gandhi.com.mx/media/logo/stores/1/logo-gandhi-52-aniv.png"
-              }
-              className="logo"
-              alt="Vite logo"
-            />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <span
-          style={{
-            display: "block",
-            fontSize: "10rem",
-          }}
-        >
-          {numero}
-        </span>
-        <h1>Hola mama estoy en internet</h1>
-
+       {/*  <Item /> */}       
+        <div
+        onClick={() => setActive(!active)}
+        style={{
+          height: 200,
+          width: 200,
+          background: active ? "blue" : "green"
+         }} 
+         
+         
+         />
         <div className="card">
-          <button style={styleButton} onClick={() => console.log("holi")}>
+          <button style={styleButton} onClick={() => handleCount()}>
             count is {count}
           </button>
           <p>
