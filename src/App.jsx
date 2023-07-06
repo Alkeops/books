@@ -1,10 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 /* import "./nombredelarchivo.css" */
-import {NavBar} from "./components/NavBar/NavBar";
-import {Item} from "./components/Item/Item";
+import { NavBar, ItemCount } from "./components";
+import { Home } from "./pages/Home";
 
 // Etiquetas de apertura y cierre <div> </div> o auto cierre <img />
 // images import reactLogo from './assets/react.svg'
@@ -14,46 +11,19 @@ import {Item} from "./components/Item/Item";
 //Eventos y estilos en camelCase
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [active, setActive] = useState(false);
-  const [form, setForm] = useState({})
-  
-  const numero = 5;
-  const styleButton = {
-    marginTop: "25px",
+  //Se envia una funcion por props, esta funcion va a recibir la cantidad
+  const handleCart = (qty) => {
+    console.log("La cantidad es", qty);
   };
-
-  const handleCount = () => {
-    setCount(count + 10)
-  }
 
   return (
     <div>
- {/*      <NavBar /> */}
-      <div className="container">
-       {/*  <Item /> */}       
-        <div
-        onClick={() => setActive(!active)}
-        style={{
-          height: 200,
-          width: 200,
-          background: active ? "blue" : "green"
-         }} 
-         
-         
-         />
-        <div className="card">
-          <button style={styleButton} onClick={() => handleCount()}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
+      <NavBar />
+      <Home />
+      {/* Al ser una funcion que pasa como props se puede poner directamente el nombre de la funcion
+      y pasarlo a su hijo. OJO no se ejecuta solo es el nombre. En este caso solo es handleCart y no handleCart() */}
+      <ItemCount stock={10} onAdd={handleCart} />
+      {/*   <ItemCount stock={0} onAdd={handleCart} /> */}
     </div>
   );
 }
