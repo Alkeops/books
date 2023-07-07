@@ -1,0 +1,27 @@
+.navbar{
+    padding: 8px 0;
+    position: relative;
+    border-bottom: 1px solid #c2c2c22f;
+}
+.navbar__content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__items{
+    display: flex;
+    gap: 24px;
+    font-size: 18px;
+    
+}
+.navbar__items a{
+    color: #c2c2c2;
+}
+.navbar__items a:hover{
+    filter: brightness(1.3)
+}
+.navbar__logo{
+    max-width: 150px;
+    filter: invert(70%);
+}

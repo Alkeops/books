@@ -1,0 +1,12 @@
+.cart-widget{
+    position: relative;
+    transform: translateY(8px);
+}
+.cart-widget svg{
+    font-size: 30px;
+}
+.cart-widget__qty{
+    position: absolute;
+    right: -4px;
+    bottom: 100%;
+}
