@@ -1,6 +1,6 @@
 import "./App.css";
 /* import "./nombredelarchivo.css" */
-import { NavBar, ItemCount, ItemListContainer } from "./components";
+import { NavBar, ItemCount, ItemListContainer, Item } from "./components";
 import { Home } from "./pages/Home";
 
 // Etiquetas de apertura y cierre <div> </div> o auto cierre <img />
@@ -21,13 +21,14 @@ function App() {
       <NavBar />
       <div className="container">
         <ItemListContainer greeting={"Hola Mundo"} />
+      
       </div>
       {/* <Home /> */}
       {/* Al ser una funcion que pasa como props se puede poner directamente el nombre de la funcion
       y pasarlo a su hijo. OJO no se ejecuta solo es el nombre. En este caso solo es handleCart y no handleCart() */}
-      <div className="container">
+     {/*  <div className="container">
         <ItemCount stock={10} onAdd={handleCart} />
-      </div>
+      </div> */}
       {/*   <ItemCount stock={0} onAdd={handleCart} /> */}
     </div>
   );
