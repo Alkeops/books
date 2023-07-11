@@ -20,8 +20,8 @@ function App() {
   return (
     <div>
       <NavBar />
-      {/* <Home /> */} 
-      <Detail />
+      <Home /> 
+      {/* <Detail /> */}
       {/* Al ser una funcion que pasa como props se puede poner directamente el nombre de la funcion
       y pasarlo a su hijo. OJO no se ejecuta solo es el nombre. En este caso solo es handleCart y no handleCart() */}
      {/*  <div className="container">
