@@ -1,18 +1,22 @@
 import "./Item.css";
 
-export const Item = () => {
-  //Aqui pueden pasar cosas
+export const Item = ({ 
+  img,
+  category,
+  title,
+  price
+}) => {
   return (
     <div className="item">
       <div className="item__img">
-        <img src="https://imagessl4.casadellibro.com/a/l/t5/64/9788497408264.jpg" />
+        <img src={img} />
       </div>
       <div className="item__content">
         <div className="item__content-info">
-          <span className="item__content-category">DRAMA</span>
-          <span className="item__content-title">El conde de montecristo</span>
+          <span className="item__content-category">{category}</span>
+          <span className="item__content-title">{title}</span>
         </div>
-        <span className="item__content-price">$59.99</span>
+        <span className="item__content-price">${price}</span>
       </div>
     </div>
   );
