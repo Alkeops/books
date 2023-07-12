@@ -30,3 +30,10 @@
     border-radius: 8px;
     color: white;
 }
+.item-count__add:disabled{
+    padding: 8px 16px;
+    background: #494b63;
+    max-width: 300px;
+    border-radius: 8px;
+    color: white;
+}

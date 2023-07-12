@@ -21,7 +21,7 @@ const BOOKS = [
     category: "Terror",
     price: 299,
     stock: 5,
-    img: "https://resources.claroshop.com/imagenes-sanborns-ii/1200/9786073178228.jpg"
+    img: "https://m.media-amazon.com/images/I/71yaw5OF7fL._AC_UF1000,1000_QL80_.jpg"
   },
   {
     id: 4,

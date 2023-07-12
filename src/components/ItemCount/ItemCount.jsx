@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './ItemCount.css';
 
-export const ItemCount = ({ stock, onAdd }) => {
+export const ItemCount = ({ stock = 0, onAdd }) => {
   //Estado para manejar el contador
   const [count, setCount] = useState(1);
 

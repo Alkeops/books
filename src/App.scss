@@ -1,0 +1,52 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+.detail {
+  padding: 40px;
+  display: flex;
+  animation: fadeIn .5s ease-in-out forwards;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  &__img{
+    width: 100%;
+    height: 600px;
+    img{
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 50%;
+    &-title{
+      font-size: 2.5rem;
+      color: white;
+      font-weight: bold;
+    }
+    &-description{
+      font-size: 1.5rem;
+      width: 100%;
+      text-align: start;
+    }
+    &-price{
+      font-size: 2.40rem;
+      color: white;
+      font-weight: bold;
+    }
+    &-stock{
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 500;
+    }
+  }
+}
