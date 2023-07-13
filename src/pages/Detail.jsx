@@ -1,34 +1,40 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ItemCount } from "../components";
+import { getBook } from "../lib/books.requests";
 
+//TODO
 export const Detail = () => {
+  const [book, setBook] = useState({});
+
   useEffect(() => {
     //Peticion detalle producto
+    getBook().then((res) => {
+      setBook(res);
+    });
   }, []);
 
   return (
     <div className="container">
       <div className="detail">
         <div className="detail__img">
-          <img src="https://m.media-amazon.com/images/I/71yaw5OF7fL._AC_UF1000,1000_QL80_.jpg" />
+          <img src={book.img} />
         </div>
         <div className="detail__info">
-          <span className="detail__info-title">Los tres mosqueteros </span>
+          <span className="detail__info-title">{book.title} </span>
 
-          <p className="detail__info-description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe
-            laborum minima nemo, quam architecto quas eum itaque corrupti sed
-            sequi neque asperiores inventore at? Placeat commodi sed beatae
-            adipisci quos, nemo voluptatem dicta quis quas tempora fugiat
-            corporis esse debitis tenetur modi recusandae impedit quo animi
-            voluptatibus! Molestiae, necessitatibus nesciunt!
-          </p>
+          <p className="detail__info-description">{book.description}</p>
 
-          <span className="detail__info-price">$231.00</span>
+          <span className="detail__info-price">
+            $
+            {(book.price || 0).toLocaleString("es-CO", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
 
-          <span className="detail__info-stock">¡Quedan solo 5!</span>
+          <span className="detail__info-stock">¡Quedan solo {book.stock}!</span>
 
-          <ItemCount stock={5} onAdd={() => alert("Comprados")}/>
+          <ItemCount stock={book.stock} onAdd={() => alert("Comprados")} />
         </div>
       </div>
     </div>
