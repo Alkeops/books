@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { ItemCount } from "../components";
 import { getBook } from "../lib/books.requests";
 
-//TODO
 export const Detail = () => {
   const [book, setBook] = useState({});
 
   useEffect(() => {
     //Peticion detalle producto
     getBook().then((res) => {
+      //Se guarda el producto del objeto
       setBook(res);
     });
   }, []);
