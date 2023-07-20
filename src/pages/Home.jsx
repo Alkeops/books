@@ -3,7 +3,8 @@ import { getBooks } from "../lib/books.requests";
 import { ItemListContainer } from "../components";
 
 export const Home = () => {
-  const [products, setProducts] = useState([]); //Importante iniciar en array para que no falle el metodo map
+  
+  const [products, setProducts] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
   //Poner en efectos peticiones o cosas asincronas
   useEffect(() => {
@@ -21,7 +22,6 @@ export const Home = () => {
 
   return (
     <div>
-      Pagina Principal
       <div className="container">
         <h5>{isLoading ? "Cargando ..." : "Listo"}</h5>
         <ItemListContainer products={products} />

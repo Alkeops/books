@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { ItemCount } from "../components";
 import { getBook } from "../lib/books.requests";
+import { useParams } from "react-router-dom";
 
 export const Detail = () => {
+  const {id} = useParams();
   const [book, setBook] = useState({});
 
+
   useEffect(() => {
-    //Peticion detalle producto
-    getBook().then((res) => {
-      //Se guarda el producto del objeto
+    getBook(+id).then((res) => {
       setBook(res);
     });
   }, []);
+
+  if(!Object.keys(book).length) return
 
   return (
     <div className="container">
@@ -26,7 +29,7 @@ export const Detail = () => {
 
           <span className="detail__info-price">
             $
-            {(book.price || 0).toLocaleString("es-CO", {
+            {(book.price || 0).toLocaleString("es-MX", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}

@@ -8,6 +8,7 @@ export const ItemListContainer = ({ products }) => (
       <Item
         key={product.id}
         // Normal
+        id={product.id}
         img={product.img}
         category={product.category}
         title={product.title}
