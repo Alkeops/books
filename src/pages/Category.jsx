@@ -10,6 +10,7 @@ export const Category = () => {
 
   useEffect(() => {
     setProducts([]);
+    setIsLoading(true);
     getBooks(id).then((res) => {
       setIsLoading(false);
       setProducts(res);
