@@ -13,11 +13,9 @@ import { Category } from "./pages/Category";
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<NavBar />}> {/* ROUTE padre necesita <Outlet /> */}
-
         <Route path="/" element={<Home />} />
          <Route path="/item/:id" element={<Detail />} />
          <Route path="/category/:id" element={<Category />} />
-
     </Route>
   )
 );
