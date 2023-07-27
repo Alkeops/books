@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { ItemCount } from "../components";
+import { Item, ItemCount } from "../components";
 import { getBook } from "../lib/books.requests";
 import { useParams } from "react-router-dom";
+import { useCartContext } from "../state/Cart.context";
 
+//TODO stock - qty
 export const Detail = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [book, setBook] = useState({});
 
+  const { addProduct } = useCartContext();
 
   useEffect(() => {
     getBook(+id).then((res) => {
@@ -14,7 +17,11 @@ export const Detail = () => {
     });
   }, []);
 
-  if(!Object.keys(book).length) return
+  const handleAdd = (qty) => {
+    addProduct(book, qty);
+  };
+
+  if (!Object.keys(book).length) return;
 
   return (
     <div className="container">
@@ -37,7 +44,7 @@ export const Detail = () => {
 
           <span className="detail__info-stock">¡Quedan solo {book.stock}!</span>
 
-          <ItemCount stock={book.stock} onAdd={() => alert("Comprados")} />
+          <ItemCount stock={book.stock} onAdd={handleAdd} />
         </div>
       </div>
     </div>

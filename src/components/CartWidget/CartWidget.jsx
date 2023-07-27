@@ -1,8 +1,14 @@
 import { FaOpencart } from "react-icons/fa";
 import "./CartWidget.css";
+import { useCartContext } from "../../state/Cart.context";
+import { useNavigate } from "react-router-dom";
 
-export const CartWidget = () => (
-  <div className="cart-widget">
-    <FaOpencart /> <span className="cart-widget__qty">(3)</span>
-  </div>
-);
+export const CartWidget = () => {
+  const { getCartQty } = useCartContext();
+  const navigate = useNavigate();
+  return (
+    <div className="cart-widget" onClick={() => navigate("/cart")}>
+      <FaOpencart /> <span className="cart-widget__qty">({getCartQty()})</span>
+    </div>
+  );
+};
