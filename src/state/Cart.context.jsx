@@ -14,11 +14,13 @@ export const useCartContext = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  //TODO AÑADIR
+  // AÑADIR
   const addProduct = (item, qty) => {
+    //Se busca el elemento
     const element = cart.find((product) => product.id === item.id);
+    //Si no existe directamente se agrega
     if (!element) return setCart([...cart, { ...item, qty }]);
-
+    //Si existe se crea un nuevo array y al elemento que coincida con el item.id recibido por parametros se le suma la cantidad recibida por parametros
     const newCart = cart.map((product) =>
       product.id === item.id ? { ...product, qty: product.qty + qty } : product
     );
@@ -38,7 +40,7 @@ export const CartProvider = ({ children }) => {
   //Precio Total
   const getTotalPrice = () =>
     cart.reduce((acc, item) => acc + item.price * item.qty, 0);
-
+  //Toda la información que comparte el contexto
   const value = {
     cart,
     addProduct,
