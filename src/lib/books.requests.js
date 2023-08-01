@@ -33,7 +33,7 @@ const BOOKS = [
   },
   {
     id: 4,
-    title: "El señor de los anillos",
+    title: "El señor de los anillos 1",
     category: "Fantasia",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
@@ -44,7 +44,7 @@ const BOOKS = [
   },
   {
     id: 5,
-    title: "El señor de los anillos",
+    title: "El señor de los anillos 2",
     category: "Fantasia",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
@@ -55,7 +55,7 @@ const BOOKS = [
   },
   {
     id: 6,
-    title: "El señor de los anillos",
+    title: "El señor de los anillos 3",
     category: "Fantasia",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
@@ -75,7 +75,7 @@ export const getBooks = (id) => {
   return new Promise((res) => {
     setTimeout(() => {
       res(_books); //Se resuelve con el array de libros
-    }, 500);
+    }, 2500);
   });
 };
 

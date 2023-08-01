@@ -6,7 +6,7 @@
 .detail {
   padding: 40px;
   display: flex;
-  animation: fadeIn .5s ease-in-out forwards;
+  animation: fadeIn 0.5s ease-in-out forwards;
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -15,10 +15,10 @@
       opacity: 1;
     }
   }
-  &__img{
+  &__img {
     width: 100%;
     height: 600px;
-    img{
+    img {
       height: 100%;
       object-fit: contain;
     }
@@ -28,25 +28,199 @@
     flex-direction: column;
     gap: 20px;
     max-width: 50%;
-    &-title{
+    &-title {
       font-size: 2.5rem;
       color: white;
       font-weight: bold;
     }
-    &-description{
+    &-description {
       font-size: 1.5rem;
       width: 100%;
       text-align: start;
     }
-    &-price{
-      font-size: 2.40rem;
+    &-price {
+      font-size: 2.4rem;
       color: white;
       font-weight: bold;
     }
-    &-stock{
+    &-stock {
       font-size: 1.4rem;
       font-style: italic;
       font-weight: 500;
     }
+  }
+}
+
+.cart {
+  &__container {
+    text-align: start;
+    max-width: 1000px;
+  }
+  &__products {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  &__item {
+    display: grid;
+    grid-template-columns: 2fr 0.5fr 1fr 1.5fr;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid rgb(141, 141, 141);
+    width: 100%;
+    position: relative;
+    span {
+      width: 100%;
+      &:nth-child(2) {
+        text-align: center;
+      }
+      &:nth-child(3),
+      &:nth-child(4) {
+        text-align: end;
+      }
+    }
+    &-delete {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      background: #2a2a2a;
+      opacity: 0;
+      border-radius: 50%;
+      transition: 0.3s;
+      pointer-events: none;
+      svg {
+        font-size: 2.4rem;
+        color: #cccccc;
+      }
+    }
+    &:hover {
+      & .cart__item-delete {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+    &-button {
+      margin-left: 65%;
+      width: max-content;
+      grid-column: 4;
+      padding: 8px 16px;
+      background: none;
+      text-align: end;
+      font-size: 1.6rem;
+      color: #cccccc;
+      border: 1px solid #cccccc6c;
+      border-radius: 8px;
+    }
+  }
+  &__total {
+    grid-column: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: end;
+    span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      &:last-child {
+        text-align: end;
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+.lds-grid {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-grid div {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  animation: lds-grid 1.2s linear infinite;
+}
+.lds-grid div:nth-child(1) {
+  top: 8px;
+  left: 8px;
+  animation-delay: 0s;
+}
+.lds-grid div:nth-child(2) {
+  top: 8px;
+  left: 32px;
+  animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(3) {
+  top: 8px;
+  left: 56px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(4) {
+  top: 32px;
+  left: 8px;
+  animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(5) {
+  top: 32px;
+  left: 32px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(6) {
+  top: 32px;
+  left: 56px;
+  animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(7) {
+  top: 56px;
+  left: 8px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(8) {
+  top: 56px;
+  left: 32px;
+  animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(9) {
+  top: 56px;
+  left: 56px;
+  animation-delay: -1.6s;
+}
+@keyframes lds-grid {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeleton {
+  height: 100%;
+  width: 100%;
+  &__img {
+    height: 80%;
+    width: 100%;
+    background: rgb(202, 165, 165);
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 60%
+      )
+      #c1c1c1;
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
   }
 }

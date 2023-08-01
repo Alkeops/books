@@ -3,7 +3,6 @@ import { CartWidget } from "../CartWidget/CartWidget";
 import { NavLink, Outlet } from "react-router-dom";
 
 export const NavBar = () => {
-  //Logica
   return (
     <>
       <header className="navbar">
@@ -21,7 +20,7 @@ export const NavBar = () => {
               <NavLink
                 to={"/category/aventura"}
                 style={({ isActive }) => ({
-                  color: isActive ? "#51c363" : "#8686d2",
+                  color: isActive ? "#51c363" : "rgb(255, 255, 250)",
                 })}
               >
                 Aventura
@@ -29,7 +28,7 @@ export const NavBar = () => {
               <NavLink
                 to={"/category/terror"}
                 style={({ isActive }) => ({
-                  color: isActive ? "#51c363" : "#8686d2",
+                  color: isActive ? "#51c363" : "rgb(255, 255, 250)",
                 })}
               >
                 Terror
@@ -37,7 +36,7 @@ export const NavBar = () => {
               <NavLink
                 to={"/category/fantasia"}
                 style={({ isActive }) => ({
-                  color: isActive ? "#51c363" : "#8686d2",
+                  color: isActive ? "#51c363" : "rgb(255, 255, 250)",
                 })}
               >
                 Fantasia

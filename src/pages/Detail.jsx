@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Item, ItemCount } from "../components";
+import { useEffect, useState, useCallback } from "react";
+import { Item, ItemCount, Loader } from "../components";
 import { getBook } from "../lib/books.requests";
 import { useParams } from "react-router-dom";
 import { useCartContext } from "../state/Cart.context";
 
-//TODO stock - qty
+
 export const Detail = () => {
   const { id } = useParams();
   const [book, setBook] = useState({});
 
-  const { addProduct } = useCartContext();
+  const { addProduct, itemInCart } = useCartContext();
 
   useEffect(() => {
     getBook(+id).then((res) => {
@@ -17,11 +17,19 @@ export const Detail = () => {
     });
   }, []);
 
-  const handleAdd = (qty) => {
-    addProduct(book, qty);
-  };
+  //useCallback //
+  /* 
+    const funcion = useCallback(() => {},[array de dependencias ])
+  */
 
-  if (!Object.keys(book).length) return;
+  const handleAdd = useCallback(
+    (qty) => {
+      addProduct(book, qty);
+    },
+    [addProduct, book]
+  );
+
+  if (!Object.keys(book).length) return <Loader />;
 
   return (
     <div className="container">
@@ -42,9 +50,12 @@ export const Detail = () => {
             })}
           </span>
 
-          <span className="detail__info-stock">¡Quedan solo {book.stock}!</span>
+          <span className="detail__info-stock">¡Ultimas piezas!</span>
 
-          <ItemCount stock={book.stock} onAdd={handleAdd} />
+          <ItemCount
+            stock={book.stock - (itemInCart?.(+id)?.qty || 0)} //Se obtiene el item si existe en el cart y se le resta al stock la cantidad que este en el cart (si no existe le resta 0 para evitar errores)
+            onAdd={handleAdd}
+          />
         </div>
       </div>
     </div>

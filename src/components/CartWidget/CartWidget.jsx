@@ -8,7 +8,7 @@ export const CartWidget = () => {
   const navigate = useNavigate();
   return (
     <div className="cart-widget" onClick={() => navigate("/cart")}>
-      <FaOpencart /> <span className="cart-widget__qty">({getCartQty()})</span>
+      <FaOpencart />{getCartQty ?  <span className="cart-widget__qty">({getCartQty})</span> : null}
     </div>
   );
 };
