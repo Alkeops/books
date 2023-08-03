@@ -1,8 +1,7 @@
 const BOOKS = [
   {
-    id: 1,
     title: "Los tres mosqueteros",
-    category: "Aventura",
+    category: "aventura",
     price: 550,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
@@ -10,81 +9,92 @@ const BOOKS = [
     stock: 10,
   },
   {
-    id: 2,
     title: "El conde de montecristo",
-    category: "Aventura",
+    category: "aventura",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
-
     price: 805,
     img: "https://imagessl4.casadellibro.com/a/l/t5/64/9788497408264.jpg",
     stock: 10,
   },
   {
-    id: 3,
     title: "El exorcista",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
-
-    category: "Terror",
+    category: "terror",
     price: 299,
     stock: 5,
     img: "https://m.media-amazon.com/images/I/71yaw5OF7fL._AC_UF1000,1000_QL80_.jpg",
   },
   {
-    id: 4,
     title: "El señor de los anillos 1",
-    category: "Fantasia",
+    category: "fantasia",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
-
     price: 450,
-    img: "https://lamexicanalibrerias.com/wp-content/uploads/2022/09/359897_portada_el-senor-de-los-anillos-3-el-retorno-del-rey_j-r-r-tolkien_202206071121-scaled.jpg",
+    img: "https://m.media-amazon.com/images/I/41N9hq9CqSL._SY344_BO1,204,203,200_QL70_ML2_.jpg",
     stock: 6,
   },
   {
-    id: 5,
     title: "El señor de los anillos 2",
-    category: "Fantasia",
+    category: "fantasia",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
 
     price: 450,
-    img: "https://lamexicanalibrerias.com/wp-content/uploads/2022/09/359897_portada_el-senor-de-los-anillos-3-el-retorno-del-rey_j-r-r-tolkien_202206071121-scaled.jpg",
+    img: "https://m.media-amazon.com/images/I/41N9hq9CqSL._SY344_BO1,204,203,200_QL70_ML2_.jpg",
     stock: 6,
   },
   {
-    id: 6,
     title: "El señor de los anillos 3",
-    category: "Fantasia",
+    category: "fantasia",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
 
     price: 450,
-    img: "https://lamexicanalibrerias.com/wp-content/uploads/2022/09/359897_portada_el-senor-de-los-anillos-3-el-retorno-del-rey_j-r-r-tolkien_202206071121-scaled.jpg",
+    img: "https://m.media-amazon.com/images/I/41N9hq9CqSL._SY344_BO1,204,203,200_QL70_ML2_.jpg",
     stock: 6,
   },
 ];
-//ESTO VA A CAMABIAR
-//Simulación de una petición de red que nunca falla
-export const getBooks = (id) => {
-  const _books = id
-    ? BOOKS.filter((book) => book.category.toLowerCase() === id)
-    : BOOKS;
 
-  return new Promise((res) => {
-    setTimeout(() => {
-      res(_books); //Se resuelve con el array de libros
-    }, 2500);
+import {
+  collection,
+  getDocs,
+  getDoc,
+  addDoc,
+  doc,
+  where,
+  query,
+} from "firebase/firestore";
+import { db } from "./config";
+
+const booksRef = collection(db, "items");
+
+export const getBooks = async (category) => {
+  const q = category
+    ? query(booksRef, where("category", "==", category))
+    : booksRef;
+
+  let books = [];
+  const querySnapshot = await getDocs(q);
+  //forEach es un metodo del retorno de getDocs y no es el de javascript
+  querySnapshot.forEach((doc) => {
+    books = [...books, { ...doc.data(), id: doc.id }];
   });
+
+  return books;
 };
 
-export const getBook = (id) => {
-  const book = BOOKS.filter((book) => book.id === id)[0];
+export const getBook = async (id) => {
+  const document = doc(db, "items", id);
+  const docSnap = await getDoc(document);
+  if (docSnap.exists()) return { id: docSnap.id, ...docSnap.data() };
 
-  return new Promise((res) => {
-    setTimeout(() => {
-      res(book);
-    }, 1500);
-  });
+  return null;
 };
+
+export const cargarData = async () => {
+  BOOKS.forEach(async (book) => {
+    await addDoc(booksRef, book)
+  })
+}
