@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { cargarData, getBooks } from "../lib/books.requests";
+import { getBooks } from "../lib/books.requests";
 import { ItemListContainer, Loader } from "../components";
 
 export const Home = () => {
@@ -7,7 +7,6 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   //Poner en efectos peticiones o cosas asincronas
   useEffect(() => {
-    /* cargarData() */
     getBooks() //Se simula una peticion
       .then(
         (res) => {

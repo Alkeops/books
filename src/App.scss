@@ -224,3 +224,35 @@
     background-position-x: -200%;
   }
 }
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  & > div{
+    width: 100%;
+  }
+  &__input{
+    background: none;
+    height: 40px;
+    border-radius: 8px;
+    background: #4e4e4e;
+    color: white;
+    padding: 8px 16px;
+    font-size: 1.8rem;
+    width: 100%;
+    &:focus{
+      outline: none;
+      border: 1px solid rgb(190, 190, 190);
+    }
+  }
+  &__button{
+    &:disabled{
+      background: #404040;
+      color: #121212;
+    }
+  }
+}

@@ -52,7 +52,7 @@ export const Detail = () => {
             })}
           </span>
 
-          <span className="detail__info-stock">¡Ultimas piezas!</span>
+          <span className="detail__info-stock">¡Ultimas piezas! Quedan {book.stock}</span>
 
           <ItemCount
             stock={book.stock - (itemInCart?.(id)?.qty || 0)} //Se obtiene el item si existe en el cart y se le resta al stock la cantidad que este en el cart (si no existe le resta 0 para evitar errores)
