@@ -1,13 +1,14 @@
 import { initializeApp } from "firebase/app";
-import {getFirestore} from 'firebase/firestore';
+import { getFirestore } from "firebase/firestore";
 
+//process.env.VAR
 const firebaseConfig = {
-  apiKey: "AIzaSyCuo2Nkw_BzotYTyvlhFUt3fITCMHCEkBk",
-  authDomain: "books-a56bd.firebaseapp.com",
-  projectId: "books-a56bd",
-  storageBucket: "books-a56bd.appspot.com",
-  messagingSenderId: "959693936487",
-  appId: "1:959693936487:web:7a5e5619b84845f581c1c2"
+  apiKey: import.meta.env.VITE_FBS_API_KEY,
+  authDomain: import.meta.env.VITE_FBS_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FBS_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FBS_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FBS_SENDER_ID,
+  appId: import.meta.env.VITE_FBS_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
