@@ -1,43 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCartContext } from "../state/Cart.context";
 import { AiOutlineDelete } from "react-icons/ai";
 import { addOrder } from "../lib/orders.requests";
 import { updateManyBooks } from "../lib/books.requests";
+import { Input, LocaleString } from "../components";
 
-/*
-  ORDEN
-
-  {
-    buyer: { name: '', email: '', phone: '' },
-    items: [{id, title, qty, price}],
-    total: 0
-  }
-
-*/
+const BUY_FORM = [
+  { label: "Nombre", name: "name", placeholder: "Escribe tu nombre" },
+  { label: "Correo", name: "email", placeholder: "Escribe tu email" },
+  { label: "Repite correo", name: "email2", placeholder: "Repite tu email" },
+  { label: "Teléfono", name: "phone", placeholder: "Escribe tu teléfono" },
+];
 
 export const Cart = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [email2, setEmail2] = useState("");
+  const [form, setForm] = useState({});
 
   const { cart, cleanCart, getTotalPrice, removeProduct } = useCartContext();
 
   const createOrder = async () => {
-    /* 
-      CART = [ 
-        { 
-          id, description, category, img, title, qty, price
-        }
-      ]
-    */
-    /*  items: [{id, title, qty, price}], */
     const items = cart.map(({ id, title, qty, price }) => ({
       id,
       title,
       qty,
       price,
     }));
+
+    const { name, phone, email } = form;
 
     const order = {
       buyer: { name, phone, email },
@@ -48,11 +36,17 @@ export const Cart = () => {
     const id = await addOrder(order);
     console.log(id); //Mostrar ID usuario TAREA <-->
 
-    await updateManyBooks(items); //NO es obligatorio
-
+    await updateManyBooks(items);
 
     cleanCart();
+  };
 
+  const handleChange = ({ target: { value, name } }) => {
+    /* handleChange = (e) */
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
   return (
@@ -80,20 +74,9 @@ export const Cart = () => {
                   <span>{item.title}</span>
 
                   <span>{item.qty}</span>
-                  <span>
-                    $
-                    {item.price.toLocaleString("es-CO", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}
-                  </span>
-                  <span>
-                    $
-                    {(item.qty * item.price).toLocaleString("es-CO", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}
-                  </span>
+                  <LocaleString num={item.price} />
+                  <LocaleString num={item.qty * item.price} />
+
                   <button
                     className="cart__item-delete"
                     onClick={() => removeProduct(item.id)}
@@ -105,49 +88,13 @@ export const Cart = () => {
             </div>
             <div className="cart__item" style={{ border: "none" }}>
               <div className="cart__total">
-                <span>Total</span>{" "}
-                <span>
-                  $
-                  {getTotalPrice.toLocaleString("es-CO", {
-                    maximumFractionDigits: 2,
-                    minimumFractionDigits: 2,
-                  })}
-                </span>
+                <span>Total</span> <LocaleString num={getTotalPrice} />
               </div>{" "}
             </div>
             <div className="form">
-              <div>
-                <span>Nombre</span>
-                <input
-                  className="form__input"
-                  placeholder="Nombre"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div>
-                <span>Correo</span>
-                <input
-                  className="form__input"
-                  placeholder="Correo"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div>
-                <span>Repetir correo</span>
-                <input
-                  className="form__input"
-                  placeholder="Repetir correo"
-                  onChange={(e) => setEmail2(e.target.value)}
-                />
-              </div>
-              <div>
-                <span>Teléfono</span>
-                <input
-                  className="form__input"
-                  placeholder="Teléfono"
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
+              {BUY_FORM.map((input) => (
+                <Input key={input.name} onChange={handleChange} {...input} />
+              ))}
               <button
                 className="cart__item-button form__button"
                 onClick={createOrder}
