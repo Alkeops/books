@@ -15,9 +15,7 @@ import { Cart } from "./pages/Cart";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<NavBar />}>
-      {" "}
-      {/* ROUTE padre necesita <Outlet /> */}
+    <Route element={<NavBar />}> {/* ROUTE padre necesita <Outlet /> */}
       <Route path="/" element={<Home />} />
       <Route path="/item/:id" element={<Detail />} />
       <Route path="/category/:id" element={<Category />} />
@@ -31,6 +29,7 @@ function App() {
     <div>
       <ThemeProvider>
         <CartProvider>
+          
           <RouterProvider router={routes} />
         </CartProvider>
       </ThemeProvider>
